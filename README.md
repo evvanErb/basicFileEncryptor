@@ -1,7 +1,7 @@
 # basicFileEncryptor
 Basic 256 bit AES file encryptor written in python.
 
-Has only been tested on .txt files not on any other extension yet.
+Has been tested on .txt and .jpg files not on any other extension yet.
 
 To run call:
 
