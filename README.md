@@ -8,3 +8,5 @@ To run call:
 python fileEncryptor.py 
 
 in terminal while in same directory as file
+
+NOTE: Current uses same IV for all encryptions ... this will be changed soon
