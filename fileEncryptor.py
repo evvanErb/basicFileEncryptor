@@ -5,11 +5,9 @@ import hashlib, random
 
 #randomly generate IV
 def randIVGen():
-    randDic = ["1","2","3","4","5","6","7","8","9","0","a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"]
-    random.shuffle(randDic)
-    IV = random.choice(randDic)
-    while (len(IV)%16 != 0):
-        IV += random.choice(randDic)
+    IV = ""
+    for i in range(16):
+        IV += chr(random.randint(0,0xFF))
     return(IV)
 
 #setting up encryptor and decryptor
