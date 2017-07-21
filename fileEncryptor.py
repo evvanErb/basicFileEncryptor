@@ -8,7 +8,7 @@ def randIVGen():
     IV = random.randint(0,0xFF)
     while (IV%16 != 0):
         IV += random.randint(0,0xFF)
-    return(IV)
+    return(str(IV))
 
 #setting up encryptor and decryptor
 def setupEncryption(encrypting):
