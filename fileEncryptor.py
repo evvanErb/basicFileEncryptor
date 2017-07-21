@@ -5,9 +5,9 @@ import hashlib, random
 
 #randomly generate IV
 def randIVGen():
-    IV = str(random.randint(0,0xFF))
-    while (len(IV)%16 != 0):
-        IV += str(random.randint(0,0xFF))
+    IV = ""
+    for i in range(16):
+        IV += chr(random.randint(0,0xFF))
     return(IV)
 
 #setting up encryptor and decryptor
