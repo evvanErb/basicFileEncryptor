@@ -99,6 +99,10 @@ while running:
 			inFile = open("files.txt","r")
 			files = inFile.readlines()
 			inFile.close()
+			#Check if path does not exist
+			if (len(files) == 0):
+				print("\n[!] Folder does not exist!")
+				continue
 			#Wipe name of files in files.txt storage
 			open("files.txt","w").close()
 			#Check in / already at end of name
@@ -128,6 +132,10 @@ while running:
 			inFile = open("files.txt","r")
 			files = inFile.readlines()
 			inFile.close()
+			#Check if path does not exist
+			if (len(files) == 0):
+				print("\n[!] Folder does not exist!")
+				continue
 			#Wipe name of files in files.txt storage
 			open("files.txt","w").close()
 			#Check in / already at end of name
