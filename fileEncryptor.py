@@ -56,7 +56,7 @@ def decryptFile(cryptors,name):
 	outfile = open(name, "w")
 	outfile.write(plainText)
 	outfile.close()
-	return("\n[*] Done decrypting file")
+	return("\n[*] Done decrypting file " + name)
 
 def encryptFile(cryptors,name):
 	#read file
@@ -115,11 +115,34 @@ while running:
 				cryptors = setupEncryption(True,key)
 				print(encryptFile(cryptors,myfile))
 	
-	elif (choice == "decrypt"):
-		name = raw_input("\nWhat is the name of the file\n>>> ")
-		key = generateKey()
-		cryptors = setupEncryption(False,key)
-		print(decryptFile(cryptors,name))
+	elif (choice == "decrypt"):		
+		name = raw_input("\nWhat is the name of the file/folder?\n>>> ")
+		#If just one file then decrypt it
+		if ("." in name):
+			key = generateKey()
+			cryptors = setupEncryption(False,key)
+			print(decryptFile(cryptors,name))
+		else:
+			#Get files in folder
+			files = os.system("echo | ls " + name + " >> files.txt")
+			inFile = open("files.txt","r")
+			files = inFile.readlines()
+			inFile.close()
+			#Wipe name of files in files.txt storage
+			open("files.txt","w").close()
+			#Check in / already at end of name
+			if (name[-1] != "/"):
+				name += "/"
+			#Add full path to files and remove endlines from end of file names
+			for myfile in range(len(files)):
+				files[myfile] = name + files[myfile]
+				files[myfile] = files[myfile][:-1]
+			#Generate key for folder
+			key = generateKey()
+			#Decrypt all files in folder
+			for myfile in files:
+				cryptors = setupEncryption(False,key)
+				print(decryptFile(cryptors,myfile))
 	
 	elif (choice == "exit"):
 		running = False
