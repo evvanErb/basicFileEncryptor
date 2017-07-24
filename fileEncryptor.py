@@ -22,7 +22,7 @@ def generateKey():
 	return(key)
 
 #setting up encryptor and decryptor
-def setupEncryption(encrypting,key):
+def setupEncryption(encrypting,key,name):
 	mode = AES.MODE_CBC
 	if (encrypting):
 		IV = randIVGen()
@@ -91,7 +91,7 @@ while running:
 		#If just one file then encrypt it
 		if ("." in name):
 			key = generateKey()
-			cryptors = setupEncryption(True,key)
+			cryptors = setupEncryption(True,key,name)
 			print(encryptFile(cryptors,name))
 		else:
 			#Get files in folder
@@ -112,7 +112,7 @@ while running:
 			key = generateKey()
 			#Encrypt all files in folder
 			for myfile in files:
-				cryptors = setupEncryption(True,key)
+				cryptors = setupEncryption(True,key,myfile)
 				print(encryptFile(cryptors,myfile))
 	
 	elif (choice == "decrypt"):		
@@ -120,7 +120,7 @@ while running:
 		#If just one file then decrypt it
 		if ("." in name):
 			key = generateKey()
-			cryptors = setupEncryption(False,key)
+			cryptors = setupEncryption(False,key,name)
 			print(decryptFile(cryptors,name))
 		else:
 			#Get files in folder
@@ -141,7 +141,7 @@ while running:
 			key = generateKey()
 			#Decrypt all files in folder
 			for myfile in files:
-				cryptors = setupEncryption(False,key)
+				cryptors = setupEncryption(False,key,myfile)
 				print(decryptFile(cryptors,myfile))
 	
 	elif (choice == "exit"):
