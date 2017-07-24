@@ -106,9 +106,10 @@ while running:
 			#Check in / already at end of name
 			if (name[-1] != "/"):
 				name += "/"
-			#Add full path to files
+			#Add full path to files and remove endlines from end of file names
 			for myfile in range(len(files)):
 				files[myfile] = name + files[myfile]
+				files[myfile] = files[myfile][:-1]
 			#Generate key for folder
 			key = generateKey()
 			#Encrypt all files in folder
