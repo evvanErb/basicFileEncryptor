@@ -9,7 +9,9 @@ python fileEncryptor.py
 
 in terminal while in same directory as file
 
-When encrypting and decrypting both files and folders please provide full path examples: 
+When encrypting and decrypting both files and folders please provide full path.
+
+Examples: 
 
 /root/Desktop/myFolder
 
