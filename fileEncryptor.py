@@ -10,8 +10,8 @@ def randIVGen():
         IV += chr(random.randint(0,0xFF))
     return(IV)
 
-#setting up encryptor and decryptor
-def setupEncryption(encrypting):
+#Make key from password
+def generateKey():
     key = raw_input("\nWhat is your password?\n>>> ")
     key2 = raw_input("\nPlease confirm your password:\n>>> ")
     while key != key2:
@@ -19,6 +19,10 @@ def setupEncryption(encrypting):
         key = raw_input("\nWhat is your password?\n>>> ")
         key2 = raw_input("\nPlease confirm your password:\n>>> ")
     key = hashlib.sha256(key).digest()
+    return(key)
+
+#setting up encryptor and decryptor
+def setupEncryption(encrypting,key):
     mode = AES.MODE_CBC
     if (encrypting):
         IV = randIVGen()
@@ -86,8 +90,9 @@ while running:
         name = raw_input("\nWhat is the name of the file/folder?\n>>> ")
         #If just one file then encrypt it
         if ("." in name):
-            cryptors = setupEncryption(True)
-            print(encryptFile(cryptors, name))
+            key = generateKey()
+            cryptors = setupEncryption(True,key)
+            print(encryptFile(cryptors,name))
         else:
             #Get files in folder
             files = os.system("echo | ls " + name + " >> files.txt")
@@ -98,15 +103,18 @@ while running:
             outFile = open("files.txt","w")
             outFile.write("")
             outFile.close
+            #Generate key for folder
+            key = generateKey()
             #Encrypt all files in folder
             for file in files:
-                cryptors = setupEncryption(True)
-                print(encryptFile(cryptors, name))
+                cryptors = setupEncryption(True,key)
+                print(encryptFile(cryptors,name))
     
     elif (choice == "decrypt"):
         name = raw_input("\nWhat is the name of the file\n>>> ")
-        cryptors = setupEncryption(False)
-        print(decryptFile(cryptors, name))
+        key = generateKey()
+        cryptors = setupEncryption(False,key)
+        print(decryptFile(cryptors,name))
     
     elif (choice == "exit"):
         running = False
