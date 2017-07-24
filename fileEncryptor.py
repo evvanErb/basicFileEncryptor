@@ -1,7 +1,7 @@
 #!/usr/bin/python2
 
 from Crypto.Cipher import AES
-import hashlib, random
+import hashlib,random,os
 
 #randomly generate IV
 def randIVGen():
@@ -73,7 +73,7 @@ def encryptFile(cryptors, name):
     outfile = open(name, "w")
     outfile.write(cipherText)
     outfile.close()
-    return("\n[*] Done encrypting file")
+    return("\n[*] Done encrypting file " + name)
 
 #********MAIN********
 
@@ -83,9 +83,25 @@ while running:
     choice = raw_input("\nEncrypt or Decrypt?\n>>> ").lower()
     
     if (choice == "encrypt"):
-        name = raw_input("\nWhat is the name of the file?\n>>> ")
-        cryptors = setupEncryption(True)
-        print(encryptFile(cryptors, name))
+        name = raw_input("\nWhat is the name of the file/folder?\n>>> ")
+        #If just one file then encrypt it
+        if ("." in name):
+            cryptors = setupEncryption(True)
+            print(encryptFile(cryptors, name))
+        else:
+            #Get files in folder
+            files = os.system("echo | ls " + name + " >> files.txt")
+            inFile = open("files.txt","r")
+            files = inFile.readlines()
+            inFile.close()
+            #Wipe name of files in files.txt storage
+            outFile = open("files.txt","w")
+            outFile.write("")
+            outFile.close
+            #Encrypt all files in folder
+            for file in files:
+                cryptors = setupEncryption(True)
+                print(encryptFile(cryptors, name))
     
     elif (choice == "decrypt"):
         name = raw_input("\nWhat is the name of the file\n>>> ")
