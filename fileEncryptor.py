@@ -35,7 +35,7 @@ def setupEncryption(encrypting,key):
 	return([encryptor,decryptor,IV])
 
 #decrpyting file
-def decryptFile(cryptors, name):
+def decryptFile(cryptors,name):
 	#read file
 	try:
 		infile = open(name, "r")
@@ -58,7 +58,7 @@ def decryptFile(cryptors, name):
 	outfile.close()
 	return("\n[*] Done decrypting file")
 
-def encryptFile(cryptors, name):
+def encryptFile(cryptors,name):
 	#read file
 	try:
 		infile = open(name, "r")
