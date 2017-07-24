@@ -100,9 +100,7 @@ while running:
 			files = inFile.readlines()
 			inFile.close()
 			#Wipe name of files in files.txt storage
-			outFile = open("files.txt","w")
-			outFile.write("")
-			outFile.close()
+			open("files.txt","w").close()
 			#Check in / already at end of name
 			if (name[-1] != "/"):
 				name += "/"
