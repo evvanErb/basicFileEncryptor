@@ -102,7 +102,13 @@ while running:
             #Wipe name of files in files.txt storage
             outFile = open("files.txt","w")
             outFile.write("")
-            outFile.close
+            outFile.close()
+            #Check in / already at end of name
+            if (name[-1] != "/"):
+                name += "/"
+            #Add full path to files
+            for file in range(len(files)):
+                files[file] = name + files[file]
             #Generate key for folder
             key = generateKey()
             #Encrypt all files in folder
